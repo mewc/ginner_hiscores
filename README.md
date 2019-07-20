@@ -1,0 +1,2 @@
+# ginners hiscores
+
