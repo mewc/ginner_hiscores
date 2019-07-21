@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+      "**/.git": true
+    },
+    "minify.minifyExistingOnSave": true,
+    "eslint.enable": true,
+    "eslint.alwaysShowStatus": true,
+    "eslint.autoFixOnSave": true,
+    "eslint.packageManager": "yarn",
+    "eslint.provideLintTask": true,
+    "eslint.codeAction.showDocumentation": {
+      "enable": true
+    },
+    "eslint.options": {
+      "configFile": ".eslintrc.*"
+    },
+    "eslint.workingDirectories": [
+      "."
+    ],
+    "files.autoSave": "onFocusChange",
+    "eslint.run": "onSave"
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "samundrak.esdoc-mdn",
+      "jeremyrajan.vscode-lebab",
+      "christian-kohler.path-intellisense",
+      "HookyQR.minify",
+      "formulahendry.auto-rename-tag",
+      "eamodio.gitlens",
+      "aaron-bond.better-comments",
+      "eg2.vscode-npm-script",
+      "christian-kohler.npm-intellisense",
+    ]
+  }
+}
