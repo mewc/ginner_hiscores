@@ -2,7 +2,7 @@ import * as appActions from '../actions/app';
 import * as scoreActions from '../actions/scores';
 
 let defaultState = {
-    name: "ginners hiscores",
+    name: "GinnersGame HISCORES",
     loading: false,
     error: false,
     notification: false,

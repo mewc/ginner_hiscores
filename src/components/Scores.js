@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, LinearProgress, Button, TableFooter } from '@material-ui/core';
 import ginnersTheme from '../static/ginnersTheme';
-import { activeScoreDifficultyChange } from '../actions/app';
-
-
-const HARD_INDEX = 0;
-const EASY_INDEX = 1;
+import { activeScoreDifficultyChange } from '../actions/scores';
 
 
 const useStyles = () => {
@@ -33,8 +29,8 @@ class Scores extends Component {
         super(props);
         this.changeDifficultyScoresetDisplayed = this.changeDifficultyScoresetDisplayed.bind(this)
     }
-    changeDifficultyScoresetDisplayed() {
-        this.props.dispatch(activeScoreDifficultyChange())
+    changeDifficultyScoresetDisplayed(diff) {
+        this.props.dispatch(activeScoreDifficultyChange(diff))
     }
 
     render() {
@@ -43,8 +39,8 @@ class Scores extends Component {
         if (this.props.scores) {
             return (
                 <React.Fragment>
-                    {/* <Button label={'HARD'} onClick={() => this.changeDifficultyScoresetDisplayed(HARD_INDEX)} >HARD</Button> */}
-                    {/* <Button label={'EASY'} onClick={() => this.changeDifficultyScoresetDisplayed(EASY_INDEX)} >EASY</Button> */}
+                    <Button label={'HARD'} onClick={() => this.changeDifficultyScoresetDisplayed('hard')} >HARD</Button>
+                    <Button label={'EASY'} onClick={() => this.changeDifficultyScoresetDisplayed('easy')} >EASY</Button>
                     <Paper className={classes.root}>
                         <Table className={classes.table}>
                             <TableHead>
@@ -80,7 +76,8 @@ class Scores extends Component {
 const mapStateToProps = (state) => {
     let activeDiff = state.scores.activeScoreDifficulty;
     return {
-        scores: state.scores[activeDiff]
+        scores: state.scores[activeDiff],
+        activeDiff
     }
 }
 

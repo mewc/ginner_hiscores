@@ -7,6 +7,9 @@ export const GET_SCORES_FAIL = 'GET_SCORES_FAIL';
 export const GET_SCORES_SUCCESS = 'GET_SCORES_SUCCESS';
 export const GET_SCORES_NORESULT = 'GET_SCORES_NORESULT';
 
+export const ACTIVESCOREDIFF_CHANGE = 'ACTIVESCOREDIFF_CHANGE';
+
+
 export const refreshScores = () => {
     return dispatch => {
         dispatch(refreshScoresStart());
@@ -46,7 +49,10 @@ export const refreshScores = () => {
     };
 };
 
-
+export const activeScoreDifficultyChange = diff => ({
+    type: ACTIVESCOREDIFF_CHANGE,
+    payload: { diff }
+});
 
 
 
