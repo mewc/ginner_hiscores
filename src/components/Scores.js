@@ -14,13 +14,18 @@ const useStyles = () => {
     let theme = ginnersTheme;
     return ({
         root: {
-            width: '100%',
-            marginTop: theme.spacing(3),
+            width: '60%',
+            marginTop: theme.spacing(1),
             overflowX: 'auto',
+            margin: 'auto'
         },
         table: {
             minWidth: '50px',
         },
+        ranking: {
+            color: '#123',
+            textDecoration: 'underline'
+        }
     });
 }
 class Scores extends Component {
@@ -28,17 +33,14 @@ class Scores extends Component {
         super(props);
         this.changeDifficultyScoresetDisplayed = this.changeDifficultyScoresetDisplayed.bind(this)
     }
-    changeDifficultyScoresetDisplayed(index) {
-        this.props.dispatch(activeScoreDifficultyChange(index))
+    changeDifficultyScoresetDisplayed() {
+        this.props.dispatch(activeScoreDifficultyChange())
     }
 
     render() {
         let { classes } = this.props;
         console.log({ 'props': this.props });
         if (this.props.scores) {
-            let dataRows = [];
-
-
             return (
                 <React.Fragment>
                     {/* <Button label={'HARD'} onClick={() => this.changeDifficultyScoresetDisplayed(HARD_INDEX)} >HARD</Button> */}
@@ -53,16 +55,15 @@ class Scores extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {Object.keys(this.props.scores[0]).forEach((key, index) => {
-                                    dataRows.push((
-                                        <TableRow key={key} >
-                                            <TableCell >{index}</TableCell>
-                                            <TableCell scope="row">
-                                                {this.props.activeScoreSet[key].username}
-                                            </TableCell>
-                                            <TableCell align="right">{this.props.activeScoreSet[key].score}</TableCell>
-                                        </TableRow>))
-                                })}
+                                {this.props.scores.map((item, index) =>
+                                    (<TableRow key={item.key} >
+                                        <TableCell className={classes.ranking.color}>{index + 1}</TableCell>
+                                        <TableCell scope="row" align="right">
+                                            {item.username}
+                                        </TableCell>
+                                        <TableCell align="right">{item.score}</TableCell>
+                                    </TableRow>)
+                                )}
                             </TableBody>
                         </Table>
                     </Paper>
@@ -77,9 +78,9 @@ class Scores extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('state', state);
+    let activeDiff = state.scores.activeScoreDifficulty;
     return {
-        scores: state.scores.scores
+        scores: state.scores[activeDiff]
     }
 }
 

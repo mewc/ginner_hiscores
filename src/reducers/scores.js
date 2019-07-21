@@ -2,13 +2,10 @@ import * as scoreActions from '../actions/scores';
 
 //0 is hard, 1 is easy
 let defaultState = {
-    scores: [
-        [],
-        []
-    ],
+    easy: [],
     loading: false,
     message: false,
-    activeScoreDifficulty: 1,
+    activeScoreDifficulty: 'easy',
 }
 
 export default function score(state = defaultState, action) {
@@ -22,8 +19,9 @@ export default function score(state = defaultState, action) {
         case scoreActions.GET_SCORES_SUCCESS:
             return {
                 ...state,
-                scores: payload.scores,
                 loading: false,
+                easy: payload.easy,
+                hard: payload.hard
             }
         case scoreActions.GET_SCORES_FAIL:
             //keep old state
