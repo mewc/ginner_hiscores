@@ -6,6 +6,7 @@ let defaultState = {
     loading: false,
     message: false,
     activeScoreDifficulty: 'easy',
+    usernameFilter: ''
 }
 
 export default function score(state = defaultState, action) {
@@ -34,6 +35,11 @@ export default function score(state = defaultState, action) {
             return {
                 ...state,
                 loading: false
+            }
+        case scoreActions.FILTER_USERNAME:
+            return {
+                ...state,
+                usernameFilter: payload
             }
         default:
             return {

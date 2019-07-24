@@ -47,7 +47,7 @@ class BaseNav extends Component {
                 className={clsx(classes.root, className)} {...other}
             >
                 <BottomNavigationAction label="Scores" icon={<PersonPin />} />
-                <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+                {/* <BottomNavigationAction label="Settings" icon={<SettingsIcon />} /> */}
             </BottomNavigation>
         );
     }

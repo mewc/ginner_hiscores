@@ -10,18 +10,33 @@ const useStyles = () => {
     let theme = ginnersTheme;
     return ({
         root: {
-            width: '60%',
             marginTop: theme.spacing(1),
-            overflowX: 'auto',
-            margin: 'auto'
         },
         table: {
-            minWidth: '50px',
+            minWidth: '90px',
         },
         ranking: {
             color: '#123',
             textDecoration: 'underline'
+        },
+        wrapper: {
+            width: '50%',
+            marginTop: theme.spacing(1),
+            overflowX: 'auto',
+            display: 'table-cell',
+            padding: '10px 5px',
+            margin: 'auto, 0'
+        },
+        headRow: {
+            backgroundColor: 'black',
+        },
+        headItem: {
+            color: '#fff'
+        },
+        diffName: {
+            textAlign: 'center'
         }
+
     });
 }
 class Scores extends Component {
@@ -37,33 +52,40 @@ class Scores extends Component {
         let { classes } = this.props;
         console.log({ 'props': this.props });
         if (this.props.scores) {
+            const diff = this.props.diff.toUpperCase();
+            console.log(diff)
+
             return (
-                <React.Fragment>
-                    <Button label={'HARD'} onClick={() => this.changeDifficultyScoresetDisplayed('hard')} >HARD</Button>
-                    <Button label={'EASY'} onClick={() => this.changeDifficultyScoresetDisplayed('easy')} >EASY</Button>
+                <div className={classes.wrapper}>
+                    {/* <Button label={'HARD'} onClick={() => this.changeDifficultyScoresetDisplayed('hard')} >HARD</Button> */}
+                    {/* <Button label={'EASY'} onClick={() => this.changeDifficultyScoresetDisplayed('easy')} >EASY</Button> */}
+                    <h2 className={classes.diffName}>{diff}</h2>
                     <Paper className={classes.root}>
                         <Table className={classes.table}>
                             <TableHead>
-                                <TableRow>
-                                    <TableCell>Ranking</TableCell>
-                                    <TableCell align="right">Username</TableCell>
-                                    <TableCell align="right">Score</TableCell>
+                                <TableRow className={classes.headRow}>
+                                    <TableCell className={classes.headItem}>Ranking</TableCell>
+                                    <TableCell className={classes.headItem} align="right">Username</TableCell>
+                                    <TableCell className={classes.headItem} align="right">Score</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.props.scores.map((item, index) =>
-                                    (<TableRow key={item.key} >
+                                {this.props.scores.map((item, index) =>{
+                                    if(item.username.includes(this.props.usernameFilter)){
+                                        return (<TableRow key={item.key} >
                                         <TableCell className={classes.ranking.color}>{index + 1}</TableCell>
                                         <TableCell scope="row" align="right">
                                             {item.username}
                                         </TableCell>
                                         <TableCell align="right">{item.score}</TableCell>
                                     </TableRow>)
+                                    }
+                                }
                                 )}
                             </TableBody>
                         </Table>
                     </Paper>
-                </React.Fragment>
+                </div>
             )
         } else {
             return (
@@ -73,11 +95,13 @@ class Scores extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+    const {usernameFilter} = state.scores
     let activeDiff = state.scores.activeScoreDifficulty;
     return {
-        scores: state.scores[activeDiff],
-        activeDiff
+        scores: state.scores[props.diff],
+        activeDiff,
+        usernameFilter
     }
 }
 

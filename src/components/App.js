@@ -12,7 +12,7 @@ import { refreshScores } from '../actions/scores';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.props.dispatch(refreshScores())
+    this.props.dispatch(refreshScores());
     document.title = 'Hiscores TheGinnersGame'
 
   }
@@ -23,7 +23,7 @@ class App extends Component {
         <div className="App">
           <AppBar />
           <MainContent />
-          <BaseNav />
+          {/* <BaseNav /> */}
         </div>
       </ThemeProvider>
     );

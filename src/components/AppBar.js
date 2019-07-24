@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Refresh from '@material-ui/icons/Refresh';
-import { refreshScores } from '../actions/scores';
+import { refreshScores, filterUsername } from '../actions/scores';
 import ginnersTheme from '../static/ginnersTheme';
 
 
@@ -57,14 +57,13 @@ const useStyles = () => {
         },
         inputRoot: {
             color: 'inherit',
+            width: '100%'
         },
         inputInput: {
             padding: '5px 5px 5px 50px',
             transition: theme.transitions.create('width'),
             width: '100%',
-            [theme.breakpoints.up('md')]: {
-                width: 200,
-            },
+
         },
         logo: {
             height: '50px',
@@ -92,6 +91,11 @@ class PrimarySearchAppBar extends Component {
         this.props.dispatch(refreshScores());
     }
 
+    handleChange = nameInput => {
+        console.log(nameInput);
+        this.props.dispatch(filterUsername(nameInput))
+    };
+
     render() {
         return (
             <div className={this.props.classes.grow}>
@@ -109,6 +113,7 @@ class PrimarySearchAppBar extends Component {
                                     input: this.props.classes.inputInput,
                                 }}
                                 inputProps={{ 'aria-label': 'Search' }}
+                                onInput={(e) => {this.handleChange(e.target.value)}}
                             />
                         </div>
 

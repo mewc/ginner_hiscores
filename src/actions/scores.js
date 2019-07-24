@@ -8,7 +8,14 @@ export const GET_SCORES_SUCCESS = 'GET_SCORES_SUCCESS';
 export const GET_SCORES_NORESULT = 'GET_SCORES_NORESULT';
 
 export const ACTIVESCOREDIFF_CHANGE = 'ACTIVESCOREDIFF_CHANGE';
+export const FILTER_USERNAME = 'FILTER_USERNAME';
 
+
+
+export const filterUsername = name => ({
+    type: FILTER_USERNAME,
+    payload: name
+});
 
 export const refreshScores = () => {
     return dispatch => {

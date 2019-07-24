@@ -11,9 +11,11 @@ const styles = {
     baseNav: {
         root: {
             width: '100%',
-            position: 'fixed',
-            bottom: 0
+            padding: '10px'
         }
+    },
+    wrapper: {
+        padding: '10px'
     }
 }
 
@@ -31,7 +33,10 @@ class MainContent extends Component {
         const { classes, children, className, ...other } = this.props;
         switch (this.props.activetab) {
             case 0:
-                return <Scores />
+                return <div className={classes.wrapper}>
+                    <Scores diff={'easy'}/>
+                    <Scores diff={'hard'}/>
+                    </div>
             case 1:
                 return <Settings />
             default:
@@ -50,4 +55,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(withStyles(styles.baseNav)(MainContent));
+export default connect(mapStateToProps)(withStyles(styles)(MainContent));
