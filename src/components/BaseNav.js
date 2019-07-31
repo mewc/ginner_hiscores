@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import ChildIcon from '@material-ui/icons/ChildFriendly';
+import EasyIcon from '@material-ui/icons/ChildCare';
+import HardIcon from '@material-ui/icons/FitnessCenter';
+import InsertChartOutlines from '@material-ui/icons/InsertChartOutlined';
 import PersonPin from '@material-ui/icons/PersonPin';
 import Waves from '@material-ui/icons/Waves';
 import ViewQuilt from '@material-ui/icons/ViewQuilt';
@@ -46,8 +50,10 @@ class BaseNav extends Component {
                 showLabels
                 className={clsx(classes.root, className)} {...other}
             >
-                <BottomNavigationAction label="Scores" icon={<PersonPin />} />
-                {/* <BottomNavigationAction label="Settings" icon={<SettingsIcon />} /> */}
+                <BottomNavigationAction label="Easy" icon={<EasyIcon />} />
+                <BottomNavigationAction label="Hard" icon={<HardIcon />} />
+                <BottomNavigationAction label="Analytics" icon={<InsertChartOutlines />} />
+                <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
             </BottomNavigation>
         );
     }

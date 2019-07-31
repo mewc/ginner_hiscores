@@ -23,7 +23,7 @@ class App extends Component {
         <div className="App">
           <AppBar />
           <MainContent />
-          {/* <BaseNav /> */}
+          <BaseNav />
         </div>
       </ThemeProvider>
     );
