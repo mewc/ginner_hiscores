@@ -53,7 +53,7 @@ class BaseNav extends Component {
                 <BottomNavigationAction label="Easy" icon={<EasyIcon />} />
                 <BottomNavigationAction label="Hard" icon={<HardIcon />} />
                 <BottomNavigationAction label="Analytics" icon={<InsertChartOutlines />} />
-                <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+                {/* <BottomNavigationAction label="Settings" icon={<SettingsIcon />} /> */}
             </BottomNavigation>
         );
     }

@@ -20,12 +20,11 @@ const useStyles = () => {
             textDecoration: 'underline'
         },
         wrapper: {
-            width: '50%',
+            width: 'fit-content',
             marginTop: theme.spacing(1),
             overflowX: 'auto',
-            display: 'table-cell',
             padding: '10px 5px',
-            margin: 'auto, 0'
+            margin: '0 auto'
         },
         headRow: {
             backgroundColor: 'black',
@@ -70,15 +69,15 @@ class Scores extends Component {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {this.props.scores.map((item, index) =>{
-                                    if(item.username.includes(this.props.usernameFilter)){
+                                {this.props.scores.map((item, index) => {
+                                    if (item.username.includes(this.props.usernameFilter)) {
                                         return (<TableRow key={item.key} >
-                                        <TableCell className={classes.ranking.color}>{index + 1}</TableCell>
-                                        <TableCell scope="row" align="right">
-                                            {item.username}
-                                        </TableCell>
-                                        <TableCell align="right">{item.score}</TableCell>
-                                    </TableRow>)
+                                            <TableCell className={classes.ranking.color}>{index + 1}</TableCell>
+                                            <TableCell scope="row" align="right">
+                                                {item.username}
+                                            </TableCell>
+                                            <TableCell align="right">{item.score}</TableCell>
+                                        </TableRow>)
                                     }
                                 }
                                 )}
@@ -96,7 +95,7 @@ class Scores extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-    const {usernameFilter} = state.scores
+    const { usernameFilter } = state.scores
     let activeDiff = state.scores.activeScoreDifficulty;
     return {
         scores: state.scores[props.diff],

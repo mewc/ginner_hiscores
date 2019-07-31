@@ -107,18 +107,18 @@ class PrimarySearchAppBar extends Component {
                                 <SearchIcon />
                             </div>
                             <InputBase
-                                placeholder="Search username…"
+                                placeholder="Search…"
                                 classes={{
                                     root: this.props.classes.inputRoot,
                                     input: this.props.classes.inputInput,
                                 }}
                                 inputProps={{ 'aria-label': 'Search' }}
-                                onInput={(e) => {this.handleChange(e.target.value)}}
+                                onInput={(e) => { this.handleChange(e.target.value) }}
                             />
                         </div>
 
                         <div className={this.props.classes.grow} />
-                        <div className={this.props.classes.rightButtons}>
+                        {/* <div className={this.props.classes.rightButtons}>
                             <IconButton
                                 edge="end"
                                 aria-label="Refresh"
@@ -128,7 +128,7 @@ class PrimarySearchAppBar extends Component {
                             >
                                 <Refresh />
                             </IconButton>
-                        </div>
+                        </div> */}
                     </Toolbar>
                 </AppBar>
             </div>
