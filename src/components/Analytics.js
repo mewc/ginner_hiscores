@@ -56,7 +56,6 @@ class Analytics extends Component {
 
     render() {
         let { classes, easy, hard } = this.props;
-        console.log(this.usernameCounts(hard));
         const hardCounts = this.usernameCounts(hard);
         const easyCounts = this.usernameCounts(easy);
         return (
