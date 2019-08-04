@@ -85,8 +85,8 @@ class Analytics extends Component {
                             </TableRow>
                             < TableRow key={'goals'} >
                                 <TableCell align="right">Total Game Time</TableCell>
-                                <TableCell align="right">{parseInt(stats.totalTimeEasy) + ' mins' || ''}</TableCell>
-                                <TableCell component="th" scope="row">{parseInt(stats.totalTimeHard) + ' mins' || ''}</TableCell>
+                                <TableCell align="right">{(parseInt(stats.totalTimeEasy / 60)) + ' mins' || ''}</TableCell>
+                                <TableCell component="th" scope="row">{(parseInt(stats.totalTimeHard / 60)) + ' mins' || ''}</TableCell>
                             </TableRow>
 
                         </TableBody>
