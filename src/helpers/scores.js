@@ -3,6 +3,11 @@ const EASY_WEIGHTING = 1.1;
 const HARD_ID = 'HARD';
 const EASY_ID = 'EASY';
 
+function calculateDifficultyFactor(difficulty, level) {
+    const diffValue = (difficulty == HARD_ID) ? HARD_WEIGHTING : EASY_WEIGHTING;
+    return parseFloat(Math.pow(diffValue, parseFloat(level)))
+}
+
 function calculateSpawnSpeed(difficultyFactor) {
     return 1.0 / difficultyFactor
 }
@@ -15,8 +20,7 @@ function calculateSpawnSpeedAndLevelCount(difficulty, level) {
     let difficultyFactor = calculateDifficultyFactor(difficulty, level)
     let spawnSpeed = calculateSpawnSpeed(difficultyFactor)
     let numberOfLevels = calculateNumberOfLevels(difficultyFactor)
-
-    return (spawnSpeed, numberOfLevels)
+    return { spawnSpeed, numberOfLevels }
 }
 
 /**
@@ -32,14 +36,14 @@ function calculateGameTimeSeconds(difficulty, score) {
     var level = 1
 
     while (score > 0) {
-        let(spawnSpeed, numberOfLevels) = calculateSpawnSpeedAndLevelCount(difficulty, level)
+        let { spawnSpeed, numberOfLevels } = calculateSpawnSpeedAndLevelCount(difficulty, level)
         let levelsToRemove = score < numberOfLevels ? score : numberOfLevels
 
-        gameTime += spawnSpeed * ParseFloat(levelsToRemove)
+        gameTime += spawnSpeed * parseFloat(levelsToRemove)
         score -= levelsToRemove
         level += 1
     }
-    return gameTime
+    return gameTime;
 }
 
 function calculateAllStats(easy, hard) {
@@ -51,36 +55,43 @@ function calculateAllStats(easy, hard) {
     let easyScoresSum = 0
     let hardScoresSum = 0
 
+    console.log(easy, hard);
     // Loop through every score and add up the stats
-    for (score in easyScores) {
-        let gameTime = calculateGameTimeSeconds(EASY_ID, score)
+    easy.forEach((game) => {
+        let gameTime = calculateGameTimeSeconds(EASY_ID, game.score)
         easyGameTimes.push(gameTime)
         easyGameTimeSum += gameTime
-        easyScoresSum += score.score
-    }
-    for (score in hardScores) {
-        let gameTime = calculateGameTimeSeconds(HARD_ID, score)
+        easyScoresSum += game.score
+    })
+
+    hard.forEach((game) => {
+        let gameTime = calculateGameTimeSeconds(HARD_ID, game.score)
         hardGameTimes.push(gameTime)
         hardGameTimeSum += gameTime
-        hardScoresSum += score.score
-    }
+        hardScoresSum += game.score
+    });
 
     let totalGames = easyGameTimes.count + hardGameTimes.count
     let totalGameTime = easyGameTimeSum + hardGameTimeSum
     let aveGameTime = totalGames > 0 ? totalGameTime / parseFloat(totalGames, 10) : 0
     let totalScore = easyScoresSum + hardScoresSum
-
     let averageScoreEasy = easyGameTimes.count > 0 ? parseFloat(easyScoresSum, 10) / parseFloat(easyGameTimes.count, 10) : 0
     let averageScoreHard = hardGameTimes.count > 0 ? parseFloat(hardScoresSum, 10) / parseFloat(hardGameTimes.count, 10) : 0
 
-    return {
+    let result = {
         totalGames,
         totalGameTime,
         aveGameTime,
         totalScore,
+        totalScoresEasy: easyScoresSum,
+        totalScoresHard: hardScoresSum,
         averageScoreEasy,
-        averageScoreHard
-    }
+        averageScoreHard,
+        totalTimeEasy: easyGameTimeSum,
+        totalTimeHard: hardGameTimeSum
+    };
+    console.log(result);
+    return result;
 }
 
 module.exports = {

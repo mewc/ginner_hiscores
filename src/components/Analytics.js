@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, LinearProgress, Button, TableFooter } from '@material-ui/core';
 import ginnersTheme from '../static/ginnersTheme';
 import { activeScoreDifficultyChange } from '../actions/scores';
-
+import { calculateAllStats } from '../helpers/scores';
 
 const useStyles = () => {
     let theme = ginnersTheme;
@@ -58,12 +58,42 @@ class Analytics extends Component {
         let { classes, easy, hard } = this.props;
         const hardCounts = this.usernameCounts(hard);
         const easyCounts = this.usernameCounts(easy);
+        const stats = calculateAllStats(easy, hard);
+        console.log(stats);
         return (
             <div className={classes.wrapper}>
-                <h1>Total games:</h1>
-                <p>EASY: {easy.length}</p>
-                <p>HARD: {hard.length}</p>
-                <h2>HARD</h2>
+                <h2>Stats</h2>
+                <Paper className={classes.root}>
+                    <Table className={classes.table}>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Metric</TableCell>
+                                <TableCell align="right">Easy</TableCell>
+                                <TableCell align="right">Hard</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            < TableRow key={'goals'} >
+                                <TableCell align="right">Total Goals</TableCell>
+                                <TableCell align="right">{stats.totalScoresEasy || ''}</TableCell>
+                                <TableCell component="th" scope="row">{stats.totalScoresHard || ''}</TableCell>
+                            </TableRow>
+                            < TableRow key={'goals'} >
+                                <TableCell align="right">Total Games</TableCell>
+                                <TableCell align="right">{easy.length || ''}</TableCell>
+                                <TableCell component="th" scope="row">{hard.length || ''}</TableCell>
+                            </TableRow>
+                            < TableRow key={'goals'} >
+                                <TableCell align="right">Total Game Time</TableCell>
+                                <TableCell align="right">{parseInt(stats.totalTimeEasy) + ' mins' || ''}</TableCell>
+                                <TableCell component="th" scope="row">{parseInt(stats.totalTimeHard) + ' mins' || ''}</TableCell>
+                            </TableRow>
+
+                        </TableBody>
+                    </Table>
+                </Paper>
+                <h2>Leaderboards:</h2>
+                <h3>HARD</h3>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
@@ -86,7 +116,7 @@ class Analytics extends Component {
                         </TableBody>
                     </Table>
                 </Paper>
-                <h2>EASY</h2>
+                <h3>EASY</h3>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
