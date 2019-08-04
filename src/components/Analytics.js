@@ -88,7 +88,6 @@ class Analytics extends Component {
                                 <TableCell align="right">{(parseInt(stats.totalTimeEasy / 60)) + ' mins' || ''}</TableCell>
                                 <TableCell component="th" scope="row">{(parseInt(stats.totalTimeHard / 60)) + ' mins' || ''}</TableCell>
                             </TableRow>
-
                         </TableBody>
                     </Table>
                 </Paper>
