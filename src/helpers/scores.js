@@ -75,8 +75,10 @@ function calculateAllStats(easy, hard) {
     let totalGameTime = easyGameTimeSum + hardGameTimeSum
     let aveGameTime = totalGames > 0 ? totalGameTime / parseFloat(totalGames, 10) : 0
     let totalScore = easyScoresSum + hardScoresSum
-    let averageScoreEasy = easyGameTimes.count > 0 ? parseFloat(easyScoresSum, 10) / parseFloat(easyGameTimes.count, 10) : 0
-    let averageScoreHard = hardGameTimes.count > 0 ? parseFloat(hardScoresSum, 10) / parseFloat(hardGameTimes.count, 10) : 0
+    let averageScoreEasy = easy.length > 0 ? parseInt(easyScoresSum / easy.length, 10) : 0
+    let averageScoreHard = hard.length > 0 ? parseInt(hardScoresSum / hard.length, 10) : 0
+    let totalEasyGames = easy.length;
+    let totalHardGames = hard.length;
 
     let result = {
         totalGames,
@@ -87,6 +89,8 @@ function calculateAllStats(easy, hard) {
         totalScoresHard: hardScoresSum,
         averageScoreEasy,
         averageScoreHard,
+        totalEasyGames,
+        totalHardGames,
         totalTimeEasy: easyGameTimeSum,
         totalTimeHard: hardGameTimeSum
     };

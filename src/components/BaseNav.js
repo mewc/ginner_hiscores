@@ -39,7 +39,7 @@ class BaseNav extends Component {
     }
 
     render() {
-        const { classes, children, className, ...other } = this.props;
+        const { classes, children, className, loading, ...other } = this.props;
         return (
             <BottomNavigation
                 value={this.props.activetab}
@@ -52,7 +52,7 @@ class BaseNav extends Component {
             >
                 <BottomNavigationAction label="Easy" icon={<EasyIcon />} />
                 <BottomNavigationAction label="Hard" icon={<HardIcon />} />
-                <BottomNavigationAction label="Analytics" icon={<InsertChartOutlines />} />
+                {< BottomNavigationAction label="Analytics" disabled={loading} icon={<InsertChartOutlines />} />}
                 {/* <BottomNavigationAction label="Settings" icon={<SettingsIcon />} /> */}
             </BottomNavigation>
         );
@@ -64,7 +64,9 @@ class BaseNav extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        activetab: state.app.activeTabIndex
+        activetab: state.app.activeTabIndex,
+        loading: state.scores.loading
+
     }
 }
 

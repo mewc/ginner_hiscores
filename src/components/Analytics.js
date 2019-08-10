@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Paper, Table, TableBody, TableCell, TableHead, TableRow, LinearProgress, Button, TableFooter } from '@material-ui/core';
 import ginnersTheme from '../static/ginnersTheme';
 import { activeScoreDifficultyChange } from '../actions/scores';
-import { calculateAllStats } from '../helpers/scores';
+import { calculateAllStats, calculateGameTimeSeconds } from '../helpers/scores';
 
 const useStyles = () => {
     let theme = ginnersTheme;
@@ -28,17 +28,21 @@ class Analytics extends Component {
         super(props);
     }
 
-    usernameCounts = (data) => {
+    usernameCounts = (data, difficulty) => {
         let u = {};
+        let times = {};
         data.forEach((d) => {
             u[d.username] = (u[d.username]) ? u[d.username] + 1 : 1;
+            let gameTime = calculateGameTimeSeconds(difficulty, d.score);
+            console.log('TIME', d.score, difficulty, gameTime);
+            times[d.username] = (times[d.username]) ? times[d.username] + gameTime : gameTime;
         })
         let counts = [];
         Object.keys(u).forEach(k => {
             counts.push({
                 username: k,
                 count: u[k],
-                time: 'x'
+                time: parseInt(times[k] / 60, 10)
             })
         })
         counts.sort((a, b) => {
@@ -56,13 +60,13 @@ class Analytics extends Component {
 
     render() {
         let { classes, easy, hard } = this.props;
-        const hardCounts = this.usernameCounts(hard);
-        const easyCounts = this.usernameCounts(easy);
+        const hardCounts = this.usernameCounts(hard, 'HARD');
+        const easyCounts = this.usernameCounts(easy, 'EASY');
         const stats = calculateAllStats(easy, hard);
         console.log(stats);
         return (
             <div className={classes.wrapper}>
-                <h2>Stats</h2>
+                <h2>General Stats</h2>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
@@ -88,18 +92,23 @@ class Analytics extends Component {
                                 <TableCell align="right">{(parseInt(stats.totalTimeEasy / 60)) + ' mins' || ''}</TableCell>
                                 <TableCell component="th" scope="row">{(parseInt(stats.totalTimeHard / 60)) + ' mins' || ''}</TableCell>
                             </TableRow>
+                            < TableRow key={'goals'} >
+                                <TableCell align="right">Average score</TableCell>
+                                <TableCell align="right">{(parseInt(stats.averageScoreEasy)) || ''}</TableCell>
+                                <TableCell component="th" scope="row">{(parseInt(stats.averageScoreHard)) || ''}</TableCell>
+                            </TableRow>
                         </TableBody>
                     </Table>
                 </Paper>
-                <h2>Leaderboards:</h2>
+                <h2>User Stats:</h2>
                 <h3>HARD</h3>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
                                 <TableCell>User</TableCell>
-                                <TableCell align="right">Game count</TableCell>
-                                <TableCell align="right">Game time</TableCell>
+                                <TableCell align="right">Games</TableCell>
+                                <TableCell align="right">Time (mins)</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -108,7 +117,7 @@ class Analytics extends Component {
                                     <TableCell align="right">{row.username}</TableCell>
                                     <TableCell align="right">{row.count}</TableCell>
                                     <TableCell component="th" scope="row">
-                                        {'-'}
+                                        {row.time}
                                     </TableCell>
                                 </TableRow>
                             ))}
