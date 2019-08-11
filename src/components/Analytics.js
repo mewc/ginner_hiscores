@@ -71,31 +71,31 @@ class Analytics extends Component {
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Metric</TableCell>
-                                <TableCell align="right">Easy</TableCell>
-                                <TableCell align="right">Hard</TableCell>
+                                <TableCell align="center">Metric</TableCell>
+                                <TableCell align="center">Easy</TableCell>
+                                <TableCell align="center">Hard</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             < TableRow key={'goals'} >
-                                <TableCell align="right">Total Goals</TableCell>
-                                <TableCell align="right">{stats.totalScoresEasy || ''}</TableCell>
-                                <TableCell component="th" scope="row">{stats.totalScoresHard || ''}</TableCell>
+                                <TableCell align="center">Total Goals</TableCell>
+                                <TableCell align="center">{stats.totalScoresEasy || ''}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{stats.totalScoresHard || ''}</TableCell>
                             </TableRow>
                             < TableRow key={'goals'} >
-                                <TableCell align="right">Total Games</TableCell>
-                                <TableCell align="right">{easy.length || ''}</TableCell>
-                                <TableCell component="th" scope="row">{hard.length || ''}</TableCell>
+                                <TableCell align="center">Total Games</TableCell>
+                                <TableCell align="center">{easy.length || ''}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{hard.length || ''}</TableCell>
                             </TableRow>
                             < TableRow key={'goals'} >
-                                <TableCell align="right">Total Game Time</TableCell>
-                                <TableCell align="right">{(parseInt(stats.totalTimeEasy / 60)) + ' mins' || ''}</TableCell>
-                                <TableCell component="th" scope="row">{(parseInt(stats.totalTimeHard / 60)) + ' mins' || ''}</TableCell>
+                                <TableCell align="center">Average goals</TableCell>
+                                <TableCell align="center">{(parseInt(stats.averageScoreEasy)) || ''}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{(parseInt(stats.averageScoreHard)) || ''}</TableCell>
                             </TableRow>
                             < TableRow key={'goals'} >
-                                <TableCell align="right">Average score</TableCell>
-                                <TableCell align="right">{(parseInt(stats.averageScoreEasy)) || ''}</TableCell>
-                                <TableCell component="th" scope="row">{(parseInt(stats.averageScoreHard)) || ''}</TableCell>
+                                <TableCell align="center">Game Time</TableCell>
+                                <TableCell align="center">{(parseInt(stats.totalTimeEasy / 60)) + ' mins' || ''}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{(parseInt(stats.totalTimeHard / 60)) + ' mins' || ''}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -106,17 +106,17 @@ class Analytics extends Component {
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>User</TableCell>
-                                <TableCell align="right">Games</TableCell>
-                                <TableCell align="right">Time (mins)</TableCell>
+                                <TableCell align="center">User</TableCell>
+                                <TableCell align="center">Games</TableCell>
+                                <TableCell align="center">Time (mins)</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {hardCounts.map(row => (
                                 < TableRow key={row.username} >
-                                    <TableCell align="right">{row.username}</TableCell>
-                                    <TableCell align="right">{row.count}</TableCell>
-                                    <TableCell component="th" scope="row">
+                                    <TableCell align="center">{row.username}</TableCell>
+                                    <TableCell align="center">{row.count}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">
                                         {row.time}
                                     </TableCell>
                                 </TableRow>
@@ -130,18 +130,18 @@ class Analytics extends Component {
                         <TableHead>
 
                             <TableRow>
-                                <TableCell>User</TableCell>
-                                <TableCell align="right">Game count</TableCell>
-                                <TableCell align="right">Game time</TableCell>
+                                <TableCell align="center">User</TableCell>
+                                <TableCell align="center">Game count</TableCell>
+                                <TableCell align="center">Game time</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {easyCounts.map(row => (
                                 <TableRow key={row.username}>
-                                    <TableCell align="right">{row.username}</TableCell>
-                                    <TableCell align="right">{row.count}</TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {'-'}
+                                    <TableCell align="center">{row.username}</TableCell>
+                                    <TableCell align="center">{row.count}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">
+                                        {row.time}
                                     </TableCell>
                                 </TableRow>
                             ))}

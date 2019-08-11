@@ -55,13 +55,14 @@ function calculateAllStats(easy, hard) {
     let easyScoresSum = 0
     let hardScoresSum = 0
 
-    console.log(easy, hard);
+    console.log(easy, easyScoresSum, hard, hardScoresSum);
     // Loop through every score and add up the stats
     easy.forEach((game) => {
         let gameTime = calculateGameTimeSeconds(EASY_ID, game.score)
         easyGameTimes.push(gameTime)
         easyGameTimeSum += gameTime
         easyScoresSum += game.score
+        console.log('EASY SCORE SUM', easyScoresSum);
     })
 
     hard.forEach((game) => {
@@ -69,9 +70,10 @@ function calculateAllStats(easy, hard) {
         hardGameTimes.push(gameTime)
         hardGameTimeSum += gameTime
         hardScoresSum += game.score
+        console.log('HARD SCORE SUM', hardScoresSum);
     });
 
-    let totalGames = easyGameTimes.count + hardGameTimes.count
+    let totalGames = easy.length + hard.length
     let totalGameTime = easyGameTimeSum + hardGameTimeSum
     let aveGameTime = totalGames > 0 ? totalGameTime / parseFloat(totalGames, 10) : 0
     let totalScore = easyScoresSum + hardScoresSum
